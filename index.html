@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ID CARD GENERATOR</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <style type="text/css">
+    .card,
+    body {
+      background: #fff
+    }
+
+    .name,
+    img {
+      position: absolute;
+      z-index: 2
+    }
+
+    body {
+      font-family: Montserrat, sans-serif
+    }
+
+    #root {
+      display: flex;
+      flex-wrap: wrap
+    }
+
+    .card {
+      width: 296px;
+      height: 420px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      position: relative;
+      border-radius: 10px
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: url('bg.svg') top center/100% no-repeat;
+      border-radius: 10px
+    }
+
+    img {
+      top: 270px;
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    .photo {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      top: 60px;
+      object-fit: cover
+    }
+
+    .name {
+      top: 200px;
+      text-align: center;
+      width: 100%;
+      font-size: 1.2em;
+      color: #000
+    }
+
+    .company,
+    .designation {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      z-index: 2;
+      font-size: .8em;
+      color: #000
+    }
+
+    .designation {
+      top: 215px
+    }
+
+    .company {
+      top: 230px
+    }
+
+    button {
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto
+    }
+
+    @media print {
+      body * {
+        visibility: hidden
+      }
+
+      #root,
+      #root * {
+        visibility: visible
+      }
+
+      #root {
+        position: absolute;
+        left: 0;
+        top: 0
+      }
+      .card {
+        margin: 0;
+      }
+    }
+
+    @page {
+      size: 296px 420px;
+      margin: 0
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script>
+    var data = [
+    {
+      "id" : "0edd2d08-b115-4255-8e3e-a007ebcf56eb",
+      "name" : "Shahul",
+      "designation" : "Software Engineer",
+      "company" : "Moderator",
+      "photo" : "images/01.jpg"
+    },
+    {
+      "id": "7b6f3a05-d5a7-44a8-a7b1-6d9c7a3f9b20",
+      "name": "Jane Smith",
+      "designation": "Developer",
+      "company": "Acme Inc.",
+      "photo": "images/02.jpg"
+    },
+    {
+      "id": "9b5c22f5-c9f9-4c1d-b4e0-c97b5f8f48ca",
+      "name": "Bob Johnson",
+      "designation": "Designer",
+      "company": "Acme Inc.",
+      "photo": "images/03.jpg"
+    },
+    {
+      "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "name": "Emily Davis",
+      "designation": "Marketing",
+      "company": "Acme Inc.",
+      "photo": "images/04.jpg"
+    },
+    {
+      "id": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "name": "Michael Brown",
+      "designation": "Consultant",
+      "company": "Acme Inc.",
+      "photo": "images/05.jpg"
+    },
+    {
+      "id": "5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9b0c",
+      "name": "Jessica Wilson",
+      "designation": "HR",
+      "company": "Acme Inc.",
+      "photo": "images/06.jpg"
+    },
+    {
+      "id": "7a8b9c0d-1e2f-3a4b-5c6d-7e8f9b0c2d3e",
+      "name": "David Moore",
+      "designation": "Sales",
+      "company": "Acme Inc.",
+      "photo": "images/07.jpg"
+    },
+    {
+      "id": "b0c2d3e4-f5a6-7b8c-9d0e-1f2g3h4j5k6l",
+      "name": "Kevin Anderson",
+      "designation": "Operations",
+      "company": "Acme Inc.",
+      "photo": "images/08.jpg"
+    },
+    {
+      "id": "d3e4f5a6-7b8c-9d0e-1f2g-3h4j5k6l7m8n",
+      "name": "Jessica Thompson",
+      "designation": "Finance",
+      "company": "Acme Inc.",
+      "photo": "images/09.jpg"
+    },
+    {
+      "id": "f5a6b8c9-d0e1-f2g3-h4j5-k6l7m8n9o0p",
+      "name": "William Garcia",
+      "designation": "Support",
+      "company": "Acme Inc.",
+      "photo": "images/10.jpg"
+    },
+  ]
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+      var root = document.getElementById("root");
+      var qr_prefix = "https://example.com/";
+      data.forEach(function (e) { 
+        var t = document.createElement("div"); t.setAttribute("id", e.id), t.setAttribute("class", "card"); 
+        var a = document.createElement("strong"); a.setAttribute("class", "name"), a.innerHTML = e.name; 
+        var n = document.createElement("p"); n.setAttribute("class", "designation"), n.innerHTML = e.designation; 
+        var i = document.createElement("p"); i.setAttribute("class", "company"), i.innerHTML = e.company; 
+        var r = document.createElement("img"); r.setAttribute("src", e.photo), r.setAttribute("class", "photo"), 
+        t.appendChild(a), t.appendChild(n), t.appendChild(i), t.appendChild(r), root.appendChild(t), 
+        new QRCode(e.id, { width: 120, height: 120 }).makeCode(qr_prefix + e.id)
+       });
+  </script>
+
+</body>
+
+</html>
