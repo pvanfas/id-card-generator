@@ -3,6 +3,8 @@ ID Card Generator
 
 This ID card generator is a simple web application that allows users to generate QR code ID cards. The QR code can be scanned to access information about the card holder.
 
+![Screenshot](https://github.com/pvanfas/id-card-generator/blob/main/screenshot.png?raw=true)
+
 Prerequisites
 -------------
 
